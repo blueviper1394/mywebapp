@@ -29,4 +29,19 @@ npm run build
 npm run preview
 ```
 
-The static files are written to `dist/`. Routes use a hash (`/#/home`) so the build can be hosted as static files, including GitHub Pages.
+The static files are written to `dist/`. Routes use a hash (`/#/home`) so the published site does not need a server rewrite.
+
+## GitHub Pages
+
+The site is published from the `dist` folder by `.github/workflows/pages.yml` on every push to `master` or `main`. The public URL is:
+
+https://blueviper1394.github.io/mywebapp/
+
+In the GitHub repository, change one setting before the first deploy:
+
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**. Do not use **Deploy from a branch**. A branch deploy serves the React source, not the built site.
+3. Commit and push these files to `master`. The workflow **Deploy to GitHub Pages** runs from the **Actions** tab.
+4. When that workflow is green, open https://blueviper1394.github.io/mywebapp/
+
+`.env` is part of the repo, so the Actions build picks up the Supabase URL and publishable key. No extra secret is required for this key.
